@@ -1,0 +1,43 @@
+* {
+    transition: all ease .5s;
+    margin: 0;
+}
+
+:root {
+    --background-colour: white;
+    --background-colour-2: rgb(237, 241, 248);
+
+    --shadow-colour: grey;
+    
+    --main-colour-opp: rgb(204, 173, 255);
+    --main-colour: rgb(98, 0, 255);
+    --main-colour-2: rgb(30, 0, 162);
+
+}
+
+
+body {
+    background: var(--background-colour-2);
+}
+
+.header {
+    width: 100%;
+    background-color: var(--background-colour);
+    border-radius: 0 0 .75rem .75rem;
+    padding: 1rem;
+}
+
+.header img {
+    width: 2rem;
+}
+
+.header h1 {
+    font-size: 1.5rem;
+    margin: 0;
+    
+}
+.page-wrapper {
+    padding: 0 10%;
+    width: calc(100vw - 20%);
+}
+
