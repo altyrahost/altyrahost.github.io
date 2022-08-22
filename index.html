@@ -13,8 +13,24 @@
     <div class="header">
         <div class="data-flex">
             <img src="media/img/altyra.png" alt="">
-            <h1>Altyra Flight Register</h1>
+            <h1>Altyra <br><b>Flight Register</b></h1>
+        </div>
+
+        <div class="data-flex">
+            <p class="active" id="menu1" onclick="module_switch('menu1')">Submit</p>
+            <p id="menu2" onclick="module_switch('menu2')">View Flights</p>
         </div>
     </div>
 
+
+
+<script>
+    function module_switch(module){
+        e = document.querySelectorAll('.header p')
+        for(i=0;i<e.length;i++){
+            e[i].classList.remove('active')
+        }
+        document.getElementById(module).classList.add('active')
+    }
+</script>
 </body>

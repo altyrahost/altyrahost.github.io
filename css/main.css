@@ -9,7 +9,8 @@
 
     --shadow-colour: grey;
     
-    --main-colour-opp: rgb(204, 173, 255);
+    --main-colour-opp1: rgb(248, 244, 255);
+    --main-colour-opp2: rgb(204, 173, 255);
     --main-colour: rgb(98, 0, 255);
     --main-colour-2: rgb(30, 0, 162);
 
@@ -25,7 +26,15 @@ body {
 .header {
     background-color: var(--background-colour);
     border-radius: 0 0 1rem 1rem;
-    padding: 1rem;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+}
+
+.header .data-flex:nth-child(2){
+    gap: 1rem;
 }
 
 .header img {
@@ -33,12 +42,39 @@ body {
 }
 
 .header h1 {
-    font-size: 1.25rem;
+    font-size: 1rem;
     margin: 0;
     color: var(--text-colour);
     font-family: Inter;
+    line-height: 1.1rem;
     font-weight: 700;
 
+}
+
+.header b {
+    font-weight: 900;
+}
+
+.header p {
+    font-size: 1rem;
+    color: var(--text-colour);
+    font-family: Inter;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: .4rem;
+    padding: .5rem 1rem;
+    transition: none;
+}
+
+.header p:hover:not(.active) {
+    background: var(--main-colour-opp1);
+    color: var(--main-colour-2)
+}
+
+.header p.active {
+    background: var(--main-colour);
+    color: var(--background-colour);
+    transition: none;
 }
 .page-wrapper {
     padding: 0 10%;
@@ -55,4 +91,26 @@ body {
     justify-content: center;
     align-items: center;
     gap: .5rem;
+}
+
+
+button {
+    border: none;
+    background-color: var(--main-colour-opp);
+    color: var(--text-colour);
+    font-size: 1.25rem;
+    font-family: Inter;
+
+}
+
+button:hover {
+    background-color: var(--main-colour);
+    color: var(--background-colour);
+}
+
+
+
+::selection {
+    background: var(--main-colour);
+    color: var(--background-colour);
 }
