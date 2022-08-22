@@ -8,6 +8,9 @@
     <title>Altyra</title>
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/fonts.css">
+
+    <link rel="stylesheet" href="css/boxicons/css/animations.css">
+	<link rel="stylesheet" href="css/boxicons/css/boxicons.css">
 </html>
 <body>
     <div class="header">
@@ -22,15 +25,171 @@
         </div>
     </div>
 
+    <div class="page-wrapper">
+
+        <div class="menu1 main">
+            <div class="data-flex" style="gap: 0;">
+                <img src="media/img/plane.gif" alt="" style="width: 4rem;">
+                <h1>Submit Your Flight</h1>
+            </div>
+            
+
+            <div class="data-flex-v" style="margin-top: 3rem;justify-content: flex-start;align-items: flex-start;">
+                <h2>Flight</h2>
+
+                <div class="main-option-grid">
+                    <div class="data-flex-v">
+                        <h3>Flight type</h3>
+                        <div class="data-flex nselect" id="nselect_flighttype">
+                            <p></p>
+                            <i class='bx bxs-chevron-down' onclick="unlock_nlist('nselect_flighttype')"></i>
+                        </div>
+                        <div class="nlist">
+                            <p onclick="changeValue('nselect_flighttype','Owner')">Owner</p>
+                            <p onclick="changeValue('nselect_flighttype','Members')">Members</p>
+                            <p onclick="changeValue('nselect_flighttype','-1 Hour')">-1 Hour</p>
+                            <p onclick="changeValue('nselect_flighttype','+1 Hour')">+1 Hour</p>
+                            <p onclick="changeValue('nselect_flighttype','Instruction')">Instruction</p>
+                        </div>
+                    </div>
+
+                    <div class="data-flex-v">
+                        <h3>Flight route (ICAO)</h3>
+                        <div class="data-flex">
+                            <input type="text" placeholder="Departure" maxlength="4">
+                            <input type="text" placeholder="Arrival" maxlength="4">
+                        </div>
+                        
+                    </div>
+
+                    <div class="data-flex-v">
+                        <h3>Flight date</h3>
+                        <input type="date" value="2017-06-01" style="max-width: none;">
+                    </div>
+                        
+                    
+                </div>
+
+
+
+                <h2>Fuel Usage</h2>
+
+                <div class="data-flex">
+                    <label class="container">
+                        <input type="checkbox" oninput="updateFuel()" id="sionfuel">
+                        <span class="checkmark"></span>
+                    </label>
+                    <h3>I took fuel in Sion</h3>
+                </div>
+
+                <div id="sionfuelflex" class="main-option-grid" style="margin-top: 1rem;">
+                    <div class="data-flex-v" style="align-items: flex-start;" id="fuel_liters">
+                        <h3>Liters</h3>
+                        <input type="text">
+                    </div>
+
+                    <div class="data-flex-v" style="align-items: flex-start;" id="fuel_pricepaid">
+                        <h3>Price Paid</h3>
+                        <input type="text">
+                    </div>
+                </div>
+
+                <h2>Log Book Times</h2>
+                <div class="main-option-grid">
+                    <div class="data-flex-v" style="align-items: flex-start;" id="fuel_liters">
+                        <h3>Take off</h3>
+                        <input type="time">
+                    </div>
+
+                    <div class="data-flex-v" style="align-items: flex-start;" id="fuel_pricepaid">
+                        <h3>Landing</h3>
+                        <input type="time">
+                    </div>
+                </div>
+
+
+                <h2>Status Fuel</h2>
+
+                <div class="main-option-grid">
+                    <div class="data-flex-v" style="align-items: flex-start;" id="fuel_liters">
+                        <h3>Before Taxi</h3>
+                        <input type="text" placeholder="In litres" maxlength="5">
+                    </div>
+
+                    <div class="data-flex-v" style="align-items: flex-start;" id="fuel_pricepaid">
+                        <h3>Engine Stop</h3>
+                        <input type="text" placeholder="In litres" maxlength="5">
+                    </div>
+                </div>
+
+                <h2>Taxes</h2>
+
+                <div class="data-flex-v" style="align-items: flex-start;" id="fuel_liters">
+                    <h3>Landing Taxes paid outside Sion and Geneva</h3>
+                    <input type="text" placeholder="In euros" maxlength="6">
+                </div>
+
+
+
+
+
+                
+
+            </div>
+        </div>
+    </div>
+
 
 
 <script>
+    var submit_module_info = {
+        "values": {
+
+        }
+    }
     function module_switch(module){
         e = document.querySelectorAll('.header p')
         for(i=0;i<e.length;i++){
             e[i].classList.remove('active')
         }
         document.getElementById(module).classList.add('active')
+    }
+
+    function changeValue(id, value){ 
+        document.querySelectorAll("#"+id+' p')[0].innerText = value;
+        submit_module_info['values'][id.replace('nselect_','')] = value;
+        unlock_nlist(id);
+    }
+
+    function unlock_nlist(id){
+        e = document.querySelectorAll('#'+id+" + .nlist")[0]
+        
+        if (e.style.maxHeight == "0rem"){
+            e.style.maxHeight = e.scrollHeight + "px";
+            setTimeout(()=>{
+                e.style.padding = ".5rem";
+            },500)
+
+        }
+        else {
+            e.style.maxHeight = "0rem";
+            e.style.padding = "0rem";
+        }
+    }
+
+    function updateFuel(){
+        e = document.getElementById('sionfuel')
+        if (e.checked){
+            document.getElementById('fuel_pricepaid').style.display = "none";
+        }
+        else {
+            document.getElementById('fuel_pricepaid').style.display = "block";
+        }
+    }
+
+
+    window.onload=()=>{
+        changeValue('nselect_flighttype','Owner');
     }
 </script>
 </body>

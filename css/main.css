@@ -9,13 +9,15 @@
 
     --shadow-colour: grey;
     
+    --main-colour-opp0: rgb(252, 246, 254);
     --main-colour-opp1: rgb(248, 244, 255);
-    --main-colour-opp2: rgb(204, 173, 255);
+    --main-colour-opp2: rgb(223, 203, 255);
     --main-colour: rgb(98, 0, 255);
     --main-colour-2: rgb(30, 0, 162);
 
 
     --text-colour: rgb(5, 6, 86);
+    --text-colour-desc: rgba(5, 6, 86, 0.444);
 }
 
 
@@ -77,8 +79,8 @@ body {
     transition: none;
 }
 .page-wrapper {
-    padding: 0 10%;
-    width: calc(100vw - 20%);
+    padding: 2rem 10%;
+    width: calc(100% - 20%);
 }
 
 
@@ -93,6 +95,13 @@ body {
     gap: .5rem;
 }
 
+.data-flex-v {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+}
 
 button {
     border: none;
@@ -113,4 +122,208 @@ button:hover {
 ::selection {
     background: var(--main-colour);
     color: var(--background-colour);
+}
+
+
+.main {
+    width: calc(100% - 4rem);
+    background: var(--background-colour);
+    border-radius: 1rem;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+
+}
+
+.main-option-grid {
+    display: grid;
+    place-items: start;
+    gap: 1rem;
+}
+
+@media screen and (min-width: 800px){
+    .main-option-grid {
+        grid-template-columns: repeat(4,auto);
+        grid-template-rows: repeat(2,auto);
+        gap: 2rem;
+    }
+}
+
+.main-option-grid .data-flex-v {
+    gap: .25rem;
+    align-items: flex-start;
+}
+
+h1 {
+    font-size: 2rem;
+    color: var(--text-colour);
+    font-family: Inter;
+    font-weight: 700;
+    line-height: 2rem;
+}
+
+h2 {
+    font-size: 1.25rem;
+    color: var(--text-colour);
+    font-family: Inter;
+    font-weight: 700;
+}
+
+h3 {
+    font-size: .75rem;
+    color: var(--text-colour-desc);
+    font-family: Inter;
+    font-weight: 500;
+}
+
+.nselect {
+    background: var(--background-colour-2);
+    border-radius: .5rem;
+    padding: .5rem;
+    gap: .75rem;
+}
+
+.nselect i {
+    cursor: pointer;
+    background: var(--main-colour-opp2);
+    color: var(--main-colour);
+    border-radius: 50%;
+}
+
+.nselect p{
+    font-size: 1rem;
+    color: var(--text-colour);
+    font-family: Inter;
+    font-weight: 700;
+}
+
+.nselect + .nlist {
+    background: var(--background-colour-2);
+    margin-top: .25rem;
+    border-radius: .5rem;
+    padding: .5rem;
+    color: var(--text-colour);
+    overflow: hidden;
+    max-height: 0rem;
+    padding: 0rem;
+    display: flex;
+    flex-direction: column;
+    gap: .25rem;
+}
+
+.nselect + .nlist p{
+    font-size: .9rem;
+    color: var(--text-colour);
+    font-family: Inter;
+    font-weight: 500;
+    padding: .25rem;
+    border-radius: .25rem;
+    cursor: pointer;
+}
+
+
+.nselect + .nlist p:hover {
+    background-color: var(--main-colour);
+    color: var(--background-colour);
+    transition: none;
+}
+
+input {
+    background: var(--background-colour-2);
+    border-radius: .5rem;
+    padding: .5rem;
+    gap: .75rem;
+    font-size: 1rem;
+    color: var(--text-colour);
+    font-family: Inter;
+    font-weight: 700;
+    max-width: 6ch;
+    border: none;
+    cursor: pointer;
+}
+
+input:focus{
+    resize: none;
+    outline: none;
+    transition: none;
+}
+
+input::placeholder {
+    font-size: .65rem;
+    color: var(--text-colour-desc);
+    font-family: Inter;
+    font-weight: 500;
+}
+
+input:checked {
+    background: var(--main-colour)
+}
+
+label.container input:checked ~ .checkmark {
+    background-color: var(--main-colour);
+}
+
+label.container {
+    position: relative;
+    cursor: pointer;
+    font-size: 3px;
+    width: 1rem;
+    height: 1rem;
+  }
+  
+  /* Hide the browser's default checkbox */
+  label.container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+    overflow: hidden;
+  }
+  
+  /* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #eee;
+    transition: none;
+    border-radius: 50%;
+}
+  
+label.container:hover input ~ .checkmark {
+background-color: #ccc;
+}
+  
+label.container input:checked ~ .checkmark {
+    transition: none;
+    background-color: var(--main-colour);
+}
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+label.container input:checked ~ .checkmark:after {
+    display: block;
+}
+label.container .checkmark:after {
+    left: 5px;
+    top: 1.5px;
+    width: 2.5px;
+    height: 7px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+
+input[type=time]{
+    max-width: 10ch;
 }
