@@ -13,6 +13,22 @@
 	<link rel="stylesheet" href="css/boxicons/css/boxicons.css">
 </html>
 <body>
+    <div id="success-display">
+        <div id="success-display-box">
+            <i class='bx bxs-check-circle' style="color: white; font-size: 1.25rem;"></i>
+    
+            <h1 class="slide-desc" style="color: white; margin-left: .5rem;"><span id="success-text"></span></h1>
+        </div>
+    </div>
+    
+    <div id="fail-display">
+        <div id="fail-display-box">
+            <i class='bx bxs-x-circle' style="color: white; font-size: 1.25rem;"></i>
+    
+            <h1 class="slide-desc" style="color: white; margin-left: .5rem;"><span id="fail-text"></span> :(</h1>
+        </div>
+    </div>
+    
     <div class="header">
         <div class="data-flex">
             <img src="https://griffins-air.club/wp-content/uploads/2021/10/unnamed.jpg" alt="">
@@ -57,14 +73,14 @@
                         <h3>Flight route (ICAO)</h3>
                         <div class="data-flex">
                             <input type="text" pattern="[a-zA-Z]*" placeholder="Departure" maxlength="4" oninput="updateUpperCase('route_start')" id="route_start">
-                            <input type="text" pattern="[a-zA-Z]*" placeholder="Arrival" maxlength="4" oninput="updateUpperCase('end')" id="route_end">
+                            <input type="text" pattern="[a-zA-Z]*" placeholder="Arrival" maxlength="4" oninput="updateUpperCase('route_end')" id="route_end">
                         </div>
                         
                     </div>
 
                     <div class="data-flex-v">
                         <h3>Flight date</h3>
-                        <input type="date" value="2022-08-22" style="max-width: none;">
+                        <input type="date" value="2022-08-22" style="max-width: none;" id="flight_date">
                     </div>
                         
                     
@@ -79,18 +95,18 @@
                         <input type="checkbox" oninput="updateFuel()" id="sionfuel">
                         <span class="checkmark"></span>
                     </label>
-                    <h3>I bought fuel in Sion</h3>
+                    <h3>I bought fuel in Sion<br>If you haven't purchased any fuel, please still check this box.</h3>
                 </div>
 
                 <div id="sionfuelflex" class="main-option-grid" style="margin-top: 1rem;">
-                    <div class="data-flex-v" style="align-items: flex-start;" id="fuel_liters">
+                    <div class="data-flex-v" style="align-items: flex-start;">
                         <h3>Fuel Purchased</h3>
-                        <input type="text" maxlength="5" id="fuel_liters_value" placeholder="In litres">
+                        <input type="number" maxlength="5" max="10000" id="fuel_liters" placeholder="In litres">
                     </div>
 
                     <div class="data-flex-v" style="align-items: flex-start;" id="fuel_pricepaid">
                         <h3>Price Paid</h3>
-                        <input type="text"   maxlength="6" id="fuel_pricepaid_value" placeholder="In total">
+                        <input type="number" max="10000" id="fuel_pricepaid_value" placeholder="In total">
                     </div>
 
                     <div class="data-flex-v" style="align-items: flex-start;">
@@ -125,14 +141,14 @@
 
                 <h2>Log Book Times</h2>
                 <div class="main-option-grid">
-                    <div class="data-flex-v" style="align-items: flex-start;" id="fuel_liters">
+                    <div class="data-flex-v" style="align-items: flex-start;">
                         <h3>Take off</h3>
-                        <input type="time">
+                        <input type="time" id="log_start">
                     </div>
 
-                    <div class="data-flex-v" style="align-items: flex-start;" id="fuel_pricepaid">
+                    <div class="data-flex-v" style="align-items: flex-start;">
                         <h3>Landing</h3>
-                        <input type="time">
+                        <input type="time" id="log_end">
                     </div>
                 </div>
 
@@ -140,22 +156,22 @@
                 <h2>Fuel Status</h2>
 
                 <div class="main-option-grid">
-                    <div class="data-flex-v" style="align-items: flex-start;" id="fuel_liters">
+                    <div class="data-flex-v" style="align-items: flex-start;">
                         <h3>Before Taxi</h3>
-                        <input type="text" placeholder="In litres" maxlength="5">
+                        <input type="number" placeholder="In litres" maxlength="5" id="fuel_start">
                     </div>
 
-                    <div class="data-flex-v" style="align-items: flex-start;" id="fuel_pricepaid">
+                    <div class="data-flex-v" style="align-items: flex-start;">
                         <h3>Engine Stop</h3>
-                        <input type="text" placeholder="In litres" maxlength="5">
+                        <input type="number" placeholder="In litres" maxlength="5"  id="fuel_end">
                     </div>
                 </div>
 
                 <h2>Taxes</h2>
                 <div class="main-option-grid">
-                    <div class="data-flex-v" style="align-items: flex-start;" id="fuel_liters">
+                    <div class="data-flex-v" style="align-items: flex-start;">
                         <h3>Landing Taxes paid <br>outside Sion and Geneva<br> (0 if no taxes were paid)</h3>
-                        <input type="text" placeholder="In euros" maxlength="6">
+                        <input type="number" placeholder="In euros" maxlength="6" id="tax_paid">
                     </div>
 
                     <div class="data-flex-v" style="align-items: flex-start;">
@@ -175,9 +191,9 @@
 
                 <h2>Authentication</h2>
                 <div class="main-option-grid">
-                    <div class="data-flex-v" style="align-items: flex-start;" id="fuel_liters">
+                    <div class="data-flex-v" style="align-items: flex-start;">
                         <h3>Your special pilot code</h3>
-                        <input type="text" placeholder="6 Characters" maxlength="6">
+                        <input type="text" placeholder="6 Characters" maxlength="6" id="auth_code">
                     </div>
                 </div>
 
@@ -185,9 +201,9 @@
 
                 <div class="data-flex" id="submitbuttons">
                     <button class="alt">
-                        Check for errors
+                        Need help with the form?
                     </button>
-                    <button>    
+                    <button onclick="submitFlightData()">    
                         Submit your flight data
                     </button>
                 </div>
@@ -226,6 +242,23 @@
     function aId(id){
         return document.getElementById(id);
     }
+
+    function failNotif(msg, delay){
+        aId('fail-text').innerText = msg;
+        aId('fail-display').classList.add('active');
+        setTimeout(function(){
+            aId('fail-display').classList.remove('active');
+        },parseInt(delay));
+    }
+
+    function successNotif(msg, delay){
+        aId('success-text').innerText = msg;
+        aId('success-display').classList.add('active');
+        setTimeout(function(){
+            aId('success-display').classList.remove('active');
+        },parseInt(delay));
+    }
+
     function module_switch(module){
         e = document.querySelectorAll('.header p')
         for(i=0;i<e.length;i++){
@@ -278,7 +311,101 @@
     }
 
     function submitFlightData(){
+        var submitdict = {
+            "flight": {
 
+            },
+            "fuel": {
+
+            },
+            "log":{
+            },
+            "tax": {
+
+            }
+        }
+
+        submitdict['flight']['type'] = document.querySelectorAll('#nselect_flighttype p').innerText;
+
+        if (aId('route_start').value.length == 4){
+            if (aId('route_end').value.length == 4){
+                submitdict['flight']['route'] = [aId('route_start').value,aId('route_end').value];
+            }
+            else {
+                failNotif("Invalid Arrival Airport Code!",2500);
+                return
+            }
+        }
+        else {
+            failNotif("Invalid Departure Airport Code!",2500);
+            return
+        }
+
+        submitdict['flight']['date'] = aId('flight_date').value;
+
+        e = aId('sionfuel').checked;
+        submitdict['fuel']['bought_sion'] = aId('sionfuel').checked;
+        if (aId('fuel_liters').value.length == 0){
+            submitdict['fuel']['litres'] = "0";
+        }
+        else {
+            submitdict['fuel']['litres'] = aId('fuel_liters').value.replace('e','');
+        }
+        submitdict['fuel']['currency'] = document.querySelectorAll('#nselect_fuelcurrency p').innerText;
+
+        if (e){
+            submitdict['fuel']['paid'] = "N/A";
+            submitdict['fuel']['receipt']= "N/A";
+        }
+        else {
+            submitdict['fuel']['paid'] = aId('fuel_pricepaid_value').value.replace('e','');
+            submitdict['fuel']['receipt']= true;
+        }
+
+        if (aId('log_start').value.length == 0){
+            failNotif("Invalid Log Departure Time",2500);
+            return
+        }
+        if (aId('log_end').value.length == 0){
+            failNotif("Invalid Log Arrival Time",2500);
+            return
+        }
+
+        submitdict['log']['time']= [aId('log_start').value,aId('log_end').value];
+
+        if (aId('fuel_start').value.length == 0){
+            failNotif("Invalid Log Departure Fuel Value",2500);
+            return
+        }
+        if (aId('fuel_end').value.length == 0){
+            failNotif("Invalid Log Arrival Fuel Value",2500);
+            return
+        }
+
+        submitdict['log']['fuel']= [aId('fuel_start').value,aId('fuel_end').value];
+
+
+        if (aId('tax_paid').value.length == 0){
+            submitdict['tax']['paid'] = "0";
+        }
+        else {
+            submitdict['tax']['paid'] = aId('tax_paid').value.replace('e','');
+        }
+
+        submitdict['tax']['currency'] = document.querySelectorAll('#nselect_taxcurrency p').innerText;
+
+        if (aId('auth_code').value.length != 6){
+            failNotif('Invalid Authentication Code',2500);
+            return
+        }
+        else {
+            submitdict['auth'] = aId('auth_code').value.toUpperCase();
+        }
+        
+
+        console.log(submitdict)
+
+        
     }
 
 
