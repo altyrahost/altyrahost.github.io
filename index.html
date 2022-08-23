@@ -15,7 +15,7 @@
 <body>
     <div class="header">
         <div class="data-flex">
-            <img src="media/img/altyra.png" alt="">
+            <img src="https://griffins-air.club/wp-content/uploads/2021/10/unnamed.jpg" alt="">
             <h1>Altyra <br><b>Flight Register</b></h1>
         </div>
 
@@ -90,8 +90,37 @@
 
                     <div class="data-flex-v" style="align-items: flex-start;" id="fuel_pricepaid">
                         <h3>Price Paid</h3>
-                        <input type="text"   maxlength="6" id="fuel_pricepaid_value" placeholder="In euros">
+                        <input type="text"   maxlength="6" id="fuel_pricepaid_value" placeholder="In total">
                     </div>
+
+                    <div class="data-flex-v" style="align-items: flex-start;">
+                        <h3>Fuel Currency</h3>
+                        <div class="data-flex nselect" id="nselect_fuelcurrency"  onclick="unlock_nlist('nselect_fuelcurrency');">
+                            <p></p>
+                            <i class='bx bxs-chevron-down'></i>
+                        </div>
+                        <div class="nlist">
+                            <p onclick="changeValue('nselect_fuelcurrency','CHF')">CHF</p>
+                            <p onclick="changeValue('nselect_fuelcurrency','GBP')">GBP</p>
+                            <p onclick="changeValue('nselect_fuelcurrency','EUR')">EUR</p>
+                        </div>
+                    </div>
+
+                    <div class="data-flex-v" style="align-items: flex-start;" id="fuel_receipt_div">
+                        <h3>Receipt from your purchase</h3>
+
+                        <div class="data-flex background pointer" >
+                            <label for="fuel_receipt" id="fuel_receipt_preview" class="pointer">Upload image</label>
+                            <input type="file" name="photo" id="fuel_receipt" style="opacity: 0;position: absolute;z-index: -1;" oninput="updateImgName('fuel_receipt_preview','fuel_receipt')" accept=".png,.jpg,.heic" >
+                        </div>
+                        
+
+                    
+                    </div>
+
+                    
+
+                    
                 </div>
 
                 <h2>Log Book Times</h2>
@@ -123,10 +152,33 @@
                 </div>
 
                 <h2>Taxes</h2>
+                <div class="main-option-grid">
+                    <div class="data-flex-v" style="align-items: flex-start;" id="fuel_liters">
+                        <h3>Landing Taxes paid <br>outside Sion and Geneva<br> (0 if no taxes were paid)</h3>
+                        <input type="text" placeholder="In euros" maxlength="6">
+                    </div>
 
-                <div class="data-flex-v" style="align-items: flex-start;" id="fuel_liters">
-                    <h3>Landing Taxes paid outside Sion and Geneva (0 if no taxes were paid)</h3>
-                    <input type="text" placeholder="In euros" maxlength="6">
+                    <div class="data-flex-v" style="align-items: flex-start;">
+                        <h3>Tax Currency</h3>
+                        <div class="data-flex nselect" id="nselect_taxcurrency"  onclick="unlock_nlist('nselect_taxcurrency');">
+                            <p></p>
+                            <i class='bx bxs-chevron-down'></i>
+                        </div>
+                        <div class="nlist">
+                            <p onclick="changeValue('nselect_taxcurrency','CHF')">CHF</p>
+                            <p onclick="changeValue('nselect_taxcurrency','GBP')">GBP</p>
+                            <p onclick="changeValue('nselect_taxcurrency','EUR')">EUR</p>
+                        </div>
+                    </div>
+                </div>
+                
+
+                <h2>Authentication</h2>
+                <div class="main-option-grid">
+                    <div class="data-flex-v" style="align-items: flex-start;" id="fuel_liters">
+                        <h3>Your special pilot code</h3>
+                        <input type="text" placeholder="6 Characters" maxlength="6">
+                    </div>
                 </div>
 
                 <h2>Submit</h2>
@@ -140,6 +192,7 @@
                     </button>
                 </div>
                 
+                
 
 
 
@@ -148,6 +201,17 @@
 
             </div>
         </div>
+    </div>
+
+    <div class="footer">
+        <div class="data-flex">
+            <img src="https://griffins-air.club/wp-content/uploads/2021/10/unnamed.jpg" alt="" style="height: 2rem;">
+            <h3>
+                Copyright © 2022 Griffin's Air / Altyra. Built by Nitlix. All rights reserved.
+            </h3>
+        </div>
+        
+        
     </div>
 
 
@@ -196,19 +260,32 @@
         e = aId('sionfuel')
         if (e.checked){
             aId('fuel_pricepaid').style.display = "none";
+            aId('fuel_receipt_div').style.display = "none";
         }
         else {
             aId('fuel_pricepaid').style.display = "block";
+            aId('fuel_receipt_div').style.display = "block";
+
         }
     }
 
     function updateUpperCase(id) {
         aId(id).value = aId(id).value.toUpperCase();
-    }   
+    }  
+    
+    function updateImgName(id,selfid){
+        aId(id).innerText = aId(selfid).value.replace('C:\\fakepath\\','')
+    }
+
+    function submitFlightData(){
+
+    }
 
 
     window.onload=()=>{
         changeValue('nselect_flighttype','Owner');
+        changeValue('nselect_fuelcurrency','EUR');
+        changeValue('nselect_taxcurrency','EUR');
     }
 </script>
 </body>

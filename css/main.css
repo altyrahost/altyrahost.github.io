@@ -38,6 +38,16 @@ body {
     flex-direction: row;
 }
 
+.footer {
+    background-color: var(--background-colour);
+    border-radius: 1rem 1rem 0 0;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
 
 @media screen and (max-width: 500px){
     .header {
@@ -50,7 +60,7 @@ body {
 }
 
 .header img {
-    width: 2rem;
+    height: 2rem;
 }
 
 .header h1 {
@@ -269,6 +279,19 @@ input {
     font-family: Inter;
     font-weight: 700;
     max-width: 6ch;
+    border: none;
+    cursor: pointer;
+}
+
+.data-flex.background {
+    background: var(--background-colour-2);
+    border-radius: .5rem;
+    padding: .5rem;
+    gap: .75rem;
+    font-size: 1rem;
+    color: var(--text-colour);
+    font-family: Inter;
+    font-weight: 700;
     border: none;
     cursor: pointer;
 }
