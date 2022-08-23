@@ -29,20 +29,20 @@
 
         <div class="menu1 main">
             <div class="data-flex" style="gap: 0;">
-                <img src="media/img/plane.gif" alt="" style="width: 4rem;">
+                <img src="media/img/plane.gif" alt="" style="width: 4rem;" id="submitimg">
                 <h1>Submit Your Flight</h1>
             </div>
             
 
-            <div class="data-flex-v" style="margin-top: 3rem;justify-content: flex-start;align-items: flex-start;">
+            <div class="data-flex-v submitflight" style="justify-content: flex-start;align-items: flex-start;">
                 <h2>Flight</h2>
 
                 <div class="main-option-grid">
-                    <div class="data-flex-v">
+                    <div class="data-flex-v pointer" >
                         <h3>Flight type</h3>
-                        <div class="data-flex nselect" id="nselect_flighttype">
+                        <div class="data-flex nselect" id="nselect_flighttype"  onclick="unlock_nlist('nselect_flighttype');">
                             <p></p>
-                            <i class='bx bxs-chevron-down' onclick="unlock_nlist('nselect_flighttype')"></i>
+                            <i class='bx bxs-chevron-down'></i>
                         </div>
                         <div class="nlist">
                             <p onclick="changeValue('nselect_flighttype','Owner')">Owner</p>
@@ -56,15 +56,15 @@
                     <div class="data-flex-v">
                         <h3>Flight route (ICAO)</h3>
                         <div class="data-flex">
-                            <input type="text" placeholder="Departure" maxlength="4">
-                            <input type="text" placeholder="Arrival" maxlength="4">
+                            <input type="text" pattern="[a-zA-Z]*" placeholder="Departure" maxlength="4" oninput="updateUpperCase('route_start')" id="route_start">
+                            <input type="text" pattern="[a-zA-Z]*" placeholder="Arrival" maxlength="4" oninput="updateUpperCase('end')" id="route_end">
                         </div>
                         
                     </div>
 
                     <div class="data-flex-v">
                         <h3>Flight date</h3>
-                        <input type="date" value="2017-06-01" style="max-width: none;">
+                        <input type="date" value="2022-08-22" style="max-width: none;">
                     </div>
                         
                     
@@ -84,13 +84,13 @@
 
                 <div id="sionfuelflex" class="main-option-grid" style="margin-top: 1rem;">
                     <div class="data-flex-v" style="align-items: flex-start;" id="fuel_liters">
-                        <h3>Liters</h3>
-                        <input type="text">
+                        <h3>Fuel Purchased</h3>
+                        <input type="text" maxlength="5" id="fuel_liters_value" placeholder="In litres">
                     </div>
 
                     <div class="data-flex-v" style="align-items: flex-start;" id="fuel_pricepaid">
                         <h3>Price Paid</h3>
-                        <input type="text">
+                        <input type="text"   maxlength="6" id="fuel_pricepaid_value" placeholder="In euros">
                     </div>
                 </div>
 
@@ -108,7 +108,7 @@
                 </div>
 
 
-                <h2>Status Fuel</h2>
+                <h2>Fuel Status</h2>
 
                 <div class="main-option-grid">
                     <div class="data-flex-v" style="align-items: flex-start;" id="fuel_liters">
@@ -125,10 +125,21 @@
                 <h2>Taxes</h2>
 
                 <div class="data-flex-v" style="align-items: flex-start;" id="fuel_liters">
-                    <h3>Landing Taxes paid outside Sion and Geneva</h3>
+                    <h3>Landing Taxes paid outside Sion and Geneva (0 if no taxes were paid)</h3>
                     <input type="text" placeholder="In euros" maxlength="6">
                 </div>
 
+                <h2>Submit</h2>
+
+                <div class="data-flex" id="submitbuttons">
+                    <button class="alt">
+                        Check for errors
+                    </button>
+                    <button>    
+                        Submit your flight data
+                    </button>
+                </div>
+                
 
 
 
@@ -147,12 +158,16 @@
 
         }
     }
+
+    function aId(id){
+        return document.getElementById(id);
+    }
     function module_switch(module){
         e = document.querySelectorAll('.header p')
         for(i=0;i<e.length;i++){
             e[i].classList.remove('active')
         }
-        document.getElementById(module).classList.add('active')
+        aId(module).classList.add('active')
     }
 
     function changeValue(id, value){ 
@@ -178,14 +193,18 @@
     }
 
     function updateFuel(){
-        e = document.getElementById('sionfuel')
+        e = aId('sionfuel')
         if (e.checked){
-            document.getElementById('fuel_pricepaid').style.display = "none";
+            aId('fuel_pricepaid').style.display = "none";
         }
         else {
-            document.getElementById('fuel_pricepaid').style.display = "block";
+            aId('fuel_pricepaid').style.display = "block";
         }
     }
+
+    function updateUpperCase(id) {
+        aId(id).value = aId(id).value.toUpperCase();
+    }   
 
 
     window.onload=()=>{
