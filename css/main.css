@@ -25,7 +25,9 @@
 
 
 body {
-    background: var(--background-colour-2);
+    background: url(https://griffins-air.club/wp-content/uploads/2021/12/pexels-pixabay-46148-scaled.jpeg);
+    background-size: cover;
+    background-position: center center;
 }
 
 .header {

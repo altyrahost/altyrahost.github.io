@@ -325,7 +325,7 @@
             }
         }
 
-        submitdict['flight']['type'] = document.querySelectorAll('#nselect_flighttype p').innerText;
+        submitdict['flight']['type'] = document.querySelectorAll('#nselect_flighttype p')[0].innerText;
 
         if (aId('route_start').value.length == 4){
             if (aId('route_end').value.length == 4){
@@ -351,7 +351,7 @@
         else {
             submitdict['fuel']['litres'] = aId('fuel_liters').value.replace('e','');
         }
-        submitdict['fuel']['currency'] = document.querySelectorAll('#nselect_fuelcurrency p').innerText;
+        submitdict['fuel']['currency'] = document.querySelectorAll('#nselect_fuelcurrency p')[0].innerText;
 
         if (e){
             submitdict['fuel']['paid'] = "N/A";
@@ -392,7 +392,7 @@
             submitdict['tax']['paid'] = aId('tax_paid').value.replace('e','');
         }
 
-        submitdict['tax']['currency'] = document.querySelectorAll('#nselect_taxcurrency p').innerText;
+        submitdict['tax']['currency'] = document.querySelectorAll('#nselect_taxcurrency p')[0].innerText;
 
         if (aId('auth_code').value.length != 6){
             failNotif('Invalid Authentication Code',2500);
