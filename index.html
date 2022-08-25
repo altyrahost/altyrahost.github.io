@@ -231,13 +231,9 @@
     </div>
 
 
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
-    var submit_module_info = {
-        "values": {
 
-        }
-    }
 
     function aId(id){
         return document.getElementById(id);
@@ -269,7 +265,6 @@
 
     function changeValue(id, value){ 
         document.querySelectorAll("#"+id+' p')[0].innerText = value;
-        submit_module_info['values'][id.replace('nselect_','')] = value;
         unlock_nlist(id);
     }
 
@@ -400,10 +395,21 @@
         }
         else {
             submitdict['auth'] = aId('auth_code').value.toUpperCase();
+            
         }
         
+        console.log(submitdict);
 
-        console.log(submitdict)
+        var xhr = new XMLHttpRequest();
+        xhr.open('post', url, true);
+        var formData = new FormData();
+        formData.append("img", $('#fuel_receipt').prop('files')[0]);
+        
+        formData.append("data", submitdict);
+        xhr.send(formData);
+        console.log(JSON.parse(xmlHttp.responseText));
+
+
 
         
     }
