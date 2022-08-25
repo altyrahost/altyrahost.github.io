@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="img/">
+    <link rel="icon" href="media/img/altyra.png">
     <title>Altyra</title>
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/fonts.css">
@@ -400,16 +400,34 @@
         
         console.log(submitdict);
 
-        var xhr = new XMLHttpRequest();
-        xhr.open('post', url, true);
+        url='https://api.nitlix.pro/api/v1/griffins/submit'
+
         var formData = new FormData();
-        formData.append("img", $('#fuel_receipt').prop('files')[0]);
+
+        rdata = $('#fuel_receipt').prop('files')[0]
+        if (rdata == null){
+            rdata = "N/A"
+        }
         
-        formData.append("data", submitdict);
-        xhr.send(formData);
-        console.log(JSON.parse(xmlHttp.responseText));
+        //formData.append("img", rdata);
+        
+        //formData.append("data", submitdict);
+
+        formData = new FormData();
+        //formData.append("file", rdata);
+        
 
 
+        $.ajax({
+            url: "https://api.nitlix.pro/api/v1/griffins/submit",
+            type: "POST",
+            data: formData,
+            success: function (msg) {
+            alert(msg)
+            },
+            processData: false,
+            contentType: false,
+        });
 
         
     }
