@@ -248,7 +248,8 @@
     }
 
     function successNotif(msg, delay){
-        aId('success-text').innerText = msg;
+        console.log('hi')
+        aId('success-text').innerText = msg;ll
         aId('success-display').classList.add('active');
         setTimeout(function(){
             aId('success-display').classList.remove('active');
@@ -411,10 +412,9 @@
         
         //formData.append("img", rdata);
         
-        //formData.append("data", submitdict);
+        formData.append("data", JSON.stringify(submitdict));
 
-        formData = new FormData();
-        //formData.append("file", rdata);
+        formData.append("file", rdata);
         
 
 
@@ -423,7 +423,7 @@
             type: "POST",
             data: formData,
             success: function (msg) {
-            alert(msg)
+                successNotif(msg,2500);
             },
             processData: false,
             contentType: false,
