@@ -63,6 +63,7 @@
                         <div class="nlist">
                             <p onclick="changeValue('nselect_flighttype','Owner')">Owner</p>
                             <p onclick="changeValue('nselect_flighttype','Members')">Members</p>
+                            <p onclick="changeValue('nselect_flighttype','Alps Tour')">Alps Tour</p>
                             <p onclick="changeValue('nselect_flighttype','-1 Hour')">-1 Hour</p>
                             <p onclick="changeValue('nselect_flighttype','+1 Hour')">+1 Hour</p>
                             <p onclick="changeValue('nselect_flighttype','Instruction')">Instruction</p>
@@ -90,37 +91,25 @@
 
                 <h2>Fuel Usage</h2>
 
-                <div class="data-flex">
-                    <label class="container">
-                        <input type="checkbox" oninput="updateFuel()" id="sionfuel">
-                        <span class="checkmark"></span>
-                    </label>
-                    <h3>I bought fuel in Sion<br>If you haven't purchased any fuel, please still check this box.</h3>
-                </div>
+
 
                 <div id="sionfuelflex" class="main-option-grid" style="margin-top: 1rem;">
                     <div class="data-flex-v" style="align-items: flex-start;">
-                        <h3>Fuel Purchased</h3>
+                        <h3>Fuel Purchased In Sion</h3>
+                        <input type="number" maxlength="5" max="10000" id="fuel_liters" placeholder="In litres">
+                    </div>
+
+                    <div class="data-flex-v" style="align-items: flex-start;">
+                        <h3>Fuel Purchased Elsewhere</h3>
                         <input type="number" maxlength="5" max="10000" id="fuel_liters" placeholder="In litres">
                     </div>
 
                     <div class="data-flex-v" style="align-items: flex-start;" id="fuel_pricepaid">
-                        <h3>Price Paid</h3>
+                        <h3>Price Paid For All Fuel</h3>
                         <input type="number" max="10000" id="fuel_pricepaid_value" placeholder="In total">
                     </div>
 
-                    <div class="data-flex-v" style="align-items: flex-start;">
-                        <h3>Fuel Currency</h3>
-                        <div class="data-flex nselect" id="nselect_fuelcurrency"  onclick="unlock_nlist('nselect_fuelcurrency');">
-                            <p></p>
-                            <i class='bx bxs-chevron-down'></i>
-                        </div>
-                        <div class="nlist">
-                            <p onclick="changeValue('nselect_fuelcurrency','CHF')">CHF</p>
-                            <p onclick="changeValue('nselect_fuelcurrency','GBP')">GBP</p>
-                            <p onclick="changeValue('nselect_fuelcurrency','EUR')">EUR</p>
-                        </div>
-                    </div>
+
 
                     <div class="data-flex-v" style="align-items: flex-start;" id="fuel_receipt_div">
                         <h3>Receipt from your purchase</h3>
@@ -142,7 +131,7 @@
                 <h2>Log Book Times</h2>
                 <div class="main-option-grid">
                     <div class="data-flex-v" style="align-items: flex-start;">
-                        <h3>Take off</h3>
+                        <h3>Total Flight Time</h3>
                         <input type="time" id="log_start">
                     </div>
 
@@ -157,36 +146,13 @@
 
                 <div class="main-option-grid">
                     <div class="data-flex-v" style="align-items: flex-start;">
-                        <h3>Before Taxi</h3>
-                        <input type="number" placeholder="In litres" maxlength="5" id="fuel_start">
+                        <h3>Total Fuel Used</h3>
+                        <input type="number" placeholder="In US Gallons" maxlength="5" max="10000" id="fuel_used" style="max-width: 10ch;">
                     </div>
 
-                    <div class="data-flex-v" style="align-items: flex-start;">
-                        <h3>Engine Stop</h3>
-                        <input type="number" placeholder="In litres" maxlength="5"  id="fuel_end">
-                    </div>
                 </div>
 
-                <h2>Taxes</h2>
-                <div class="main-option-grid">
-                    <div class="data-flex-v" style="align-items: flex-start;">
-                        <h3>Landing Taxes paid <br>outside Sion and Geneva<br> (0 if no taxes were paid)</h3>
-                        <input type="number" placeholder="In euros" maxlength="6" id="tax_paid">
-                    </div>
-
-                    <div class="data-flex-v" style="align-items: flex-start;">
-                        <h3>Tax Currency</h3>
-                        <div class="data-flex nselect" id="nselect_taxcurrency"  onclick="unlock_nlist('nselect_taxcurrency');">
-                            <p></p>
-                            <i class='bx bxs-chevron-down'></i>
-                        </div>
-                        <div class="nlist">
-                            <p onclick="changeValue('nselect_taxcurrency','CHF')">CHF</p>
-                            <p onclick="changeValue('nselect_taxcurrency','GBP')">GBP</p>
-                            <p onclick="changeValue('nselect_taxcurrency','EUR')">EUR</p>
-                        </div>
-                    </div>
-                </div>
+                
                 
 
                 <h2>Authentication</h2>
