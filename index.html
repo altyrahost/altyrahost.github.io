@@ -349,7 +349,7 @@
         submitdict['fuel']['currency'] = document.querySelectorAll('#nselect_fuelcurrency p')[0].innerText;
 
         if (e){
-            submitdict['fuel']['paid'] = "N/A";
+            submitdict['fuel']['paid'] = "0";
             submitdict['fuel']['receipt']= "N/A";
         }
         else {
@@ -414,6 +414,7 @@
         formData.append("data", JSON.stringify(submitdict));
 
         formData.append("file", rdata);
+        console.log(formData.get('file'))
         
 
 
