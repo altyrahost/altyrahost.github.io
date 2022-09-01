@@ -496,10 +496,7 @@ input[type=time]{
     font-weight: 600;
 }
 
-.html-duration-picker-input-controls-wrapper .caret-up {
-    border-color: transparent transparent white transparent !important;
-}
 
-.html-duration-picker-input-controls-wrapper .caret-down {
-    border-color: white transparent transparent transparent !important;
+.scroll-btn {
+    display: none !important;
 }
