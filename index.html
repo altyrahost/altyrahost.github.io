@@ -85,6 +85,21 @@
                         <h3>Flight date</h3>
                         <input type="date" value="2022-08-22" style="max-width: none;" id="flight_date">
                     </div>
+
+                    <div class="data-flex-v pointer" >
+                        <h3>Pilot in charge</h3>
+                        <div class="data-flex nselect" id="nselect_flightpilot"  onclick="unlock_nlist('nselect_flightpilot');">
+                            <p></p>
+                            <i class='bx bxs-chevron-down'></i>
+                        </div>
+                        <div class="nlist">
+                            <p onclick="changeValue('nselect_flightpilot','EST')">EST</p>
+                            <p onclick="changeValue('nselect_flightpilot','PRA')">PRA</p>
+                            <p onclick="changeValue('nselect_flightpilot','POF')">POF</p>
+                            <p onclick="changeValue('nselect_flightpilot','MPTr')">MPT</p>
+                            <p onclick="changeValue('nselect_flightpilot','MIEL')">MIEL</p>
+                        </div>
+                    </div>
                         
                     
                 </div>
@@ -146,12 +161,12 @@
                 <h2>Log Book Times</h2>
                 <div class="main-option-grid">
                     <div class="data-flex-v" style="align-items: flex-start;">
-                        <h3>Total Flight Time (In Hours:Minutes)</h3>
+                        <h3>Total Flight Time<br>(In Hours:Minutes)</h3>
                         <input class="html-duration-picker" data-hide-seconds id="log_total" style="max-width: 15ch;">
                     </div>
 
                     <div class="data-flex-v" style="align-items: flex-start;">
-                        <h3>Landing</h3>
+                        <h3>Landing Time<br>(In Hours:Minutes (PM/AM Optional))</h3>
                         <input type="time" id="log_end"style="max-width: 15ch;">
                     </div>
                 </div>
@@ -173,8 +188,8 @@
                 <h2>Authentication</h2>
                 <div class="main-option-grid">
                     <div class="data-flex-v" style="align-items: flex-start;">
-                        <h3>Your special pilot code</h3>
-                        <input type="text" placeholder="6 Characters" maxlength="6" id="auth_code">
+                        <h3>The password given to you</h3>
+                        <input type="text" placeholder="4 Characters" maxlength="4" id="auth_code">
                     </div>
                 </div>
 
@@ -372,10 +387,11 @@
         }
 
         submitdict['fuel']['currency'] = document.querySelectorAll('#nselect_fuelcurrency p')[0].innerText;
-        
+        submitdict['flight']['pilot'] = document.querySelectorAll('#nselect_flightpilot p')[0].innerText;
 
 
-        if (aId('auth_code').value.length != 6){
+
+        if (aId('auth_code').value.length != 4){
             failNotif('Invalid Authentication Code',2500);
             return
         }
@@ -441,6 +457,8 @@
 
         
         changeValue('nselect_flighttype','Owner');
+        changeValue('nselect_fuelcurrency','CHF');
+        changeValue('nselect_flightpilot','EST');
     }
 </script>
 </body>

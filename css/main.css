@@ -184,13 +184,25 @@ button.alt {
     gap: 1rem;
 }
 
-@media screen and (min-width: 800px){
+@media screen and (min-width: 80rem){
     .main-option-grid {
         grid-template-columns: repeat(4,auto);
-        grid-template-rows: repeat(auto,auto);
+        grid-template-rows: auto auto;
         gap: 2rem;
+        width: calc(100% - 7rem);
     }
 }
+
+
+@media screen and (max-width: 80rem){
+    .main-option-grid {
+        grid-template-columns: repeat(3,auto);
+        grid-template-rows: auto auto;
+        gap: 2rem;
+        width: calc(100% - 5rem);
+    }
+}
+
 
 .main-option-grid .data-flex-v {
     gap: .25rem;
@@ -386,6 +398,10 @@ input[type=time]{
 
 .data-flex-v.submitflight h2 {
     margin-top: 2rem;
+}
+
+.submitflight {
+    width: 100%;
 }
 
 .pointer {
