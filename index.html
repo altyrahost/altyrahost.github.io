@@ -95,24 +95,24 @@
 
                 <div id="sionfuelflex" class="main-option-grid" style="margin-top: 1rem;">
                     <div class="data-flex-v" style="align-items: flex-start;">
-                        <h3>Fuel Loaded in Sion</h3>
-                        <input type="number" maxlength="5" max="10000" id="fuel_liters" placeholder="In litres">
+                        <h3>Fuel Loaded<br><b> in Sion</b></h3>
+                        <input type="number" maxlength="5" max="10000" id="sion_liters" placeholder="In litres">
                     </div>
 
                     <div class="data-flex-v" style="align-items: flex-start;">
-                        <h3>Fuel Purchased Elsewhere</h3>
+                        <h3>Fuel Purchased<br><b>Elsewhere</b></h3>
                         <input type="number" maxlength="5" max="10000" id="fuel_liters" placeholder="In litres">
                     </div>
 
                     <div class="data-flex-v" style="align-items: flex-start;" id="fuel_pricepaid">
-                        <h3>Price Paid For All Fuel</h3>
+                        <h3>Price Paid For Fuel<br><b>Outside Sion</b></h3>
                         <input type="number" max="10000" id="fuel_pricepaid_value" placeholder="In total">
                     </div>
 
 
 
                     <div class="data-flex-v" style="align-items: flex-start;" id="fuel_receipt_div">
-                        <h3>Receipt from your purchase</h3>
+                        <h3>Receipt from your purchase<br>(If you bought fuel outside Sion)</h3>
 
                         <div class="data-flex background pointer" >
                             <label for="fuel_receipt" id="fuel_receipt_preview" class="pointer">Upload image</label>
@@ -131,13 +131,13 @@
                 <h2>Log Book Times</h2>
                 <div class="main-option-grid">
                     <div class="data-flex-v" style="align-items: flex-start;">
-                        <h3>Total Flight Time</h3>
-                        <input type="time" id="log_start">
+                        <h3>Total Flight Time (In Hours:Minutes)</h3>
+                        <input class="html-duration-picker" data-hide-seconds id="log_total" style="max-width: 15ch;">
                     </div>
 
                     <div class="data-flex-v" style="align-items: flex-start;">
                         <h3>Landing</h3>
-                        <input type="time" id="log_end">
+                        <input type="time" id="log_end"style="max-width: 15ch;">
                     </div>
                 </div>
 
@@ -147,7 +147,7 @@
                 <div class="main-option-grid">
                     <div class="data-flex-v" style="align-items: flex-start;">
                         <h3>Total Fuel Used (USG from Avydine)</h3>
-                        <input type="number" placeholder="In US Gallons" maxlength="5" max="10000" id="fuel_used" style="max-width: 10ch;">
+                        <input type="number" placeholder="In US Gallons" maxlength="5" max="10000" id="fuel_total" style="max-width: 10ch;">
                     </div>
 
                 </div>
@@ -198,6 +198,9 @@
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="wrapper.js"></script>
+<script src="html-duration-picker.js"></script>
+
 <script>
 
 
@@ -268,10 +271,14 @@
     }  
     
     function updateImgName(id,selfid){
-        aId(id).innerText = aId(selfid).value.replace('C:\\fakepath\\','')
+        aId(id).innerText = aId(selfid).value.replace('C:\\fakepath\\','') + " (Click to upload a different one)"
     }
 
     function submitFlightData(){
+
+        successNotif('Submitting your flight data...',2500);
+
+
         var submitdict = {
             "flight": {
 
@@ -280,9 +287,6 @@
 
             },
             "log":{
-            },
-            "tax": {
-
             }
         }
 
@@ -304,27 +308,36 @@
 
         submitdict['flight']['date'] = aId('flight_date').value;
 
-        e = aId('sionfuel').checked;
-        submitdict['fuel']['bought_sion'] = aId('sionfuel').checked;
-        if (aId('fuel_liters').value.length == 0){
-            submitdict['fuel']['litres'] = "0";
+       
+        if (aId('sion_liters').value.length == 0){
+            submitdict['fuel']['sionliters'] = "0";
         }
         else {
-            submitdict['fuel']['litres'] = aId('fuel_liters').value.replace('e','');
+            submitdict['fuel']['sionliters'] = aId('sion_liters').value.replace('e','');
         }
-        submitdict['fuel']['currency'] = document.querySelectorAll('#nselect_fuelcurrency p')[0].innerText;
 
-        if (e){
+        
+        if (aId('fuel_liters').value.length == 0){
+            submitdict['fuel']['elseliters'] = "0";
+        }
+        else {
+            submitdict['fuel']['elseliters'] = aId('fuel_liters').value.replace('e','');
+        }
+
+        if (aId('fuel_pricepaid_value').value.length == 0){
             submitdict['fuel']['paid'] = "0";
-            submitdict['fuel']['receipt']= "N/A";
         }
         else {
             submitdict['fuel']['paid'] = aId('fuel_pricepaid_value').value.replace('e','');
-            submitdict['fuel']['receipt']= true;
         }
 
-        if (aId('log_start').value.length == 0){
-            failNotif("Invalid Log Departure Time",2500);
+        
+
+
+
+
+        if (aId('log_total').value.length == 0){
+            failNotif("Invalid Flight Duration Time",2500);
             return
         }
         if (aId('log_end').value.length == 0){
@@ -332,28 +345,20 @@
             return
         }
 
-        submitdict['log']['time']= [aId('log_start').value,aId('log_end').value];
-
-        if (aId('fuel_start').value.length == 0){
-            failNotif("Invalid Log Departure Fuel Value",2500);
-            return
-        }
-        if (aId('fuel_end').value.length == 0){
-            failNotif("Invalid Log Arrival Fuel Value",2500);
-            return
-        }
-
-        submitdict['log']['fuel']= [aId('fuel_start').value,aId('fuel_end').value];
+        submitdict['log']['time']= [aId('log_total').value,aId('log_end').value];
 
 
-        if (aId('tax_paid').value.length == 0){
-            submitdict['tax']['paid'] = "0";
+
+        if (aId('fuel_total').value.length == 0){
+            submitdict['log']['fuel'] = "0";
         }
         else {
-            submitdict['tax']['paid'] = aId('tax_paid').value.replace('e','');
+            submitdict['log']['fuel'] = aId('fuel_total').value.replace('e','');
         }
 
-        submitdict['tax']['currency'] = document.querySelectorAll('#nselect_taxcurrency p')[0].innerText;
+
+
+
 
         if (aId('auth_code').value.length != 6){
             failNotif('Invalid Authentication Code',2500);
@@ -383,13 +388,23 @@
         console.log(formData.get('file'))
         
 
-
+    
         $.ajax({
             url: "https://api.nitlix.pro/api/v1/griffins/submit",
             type: "POST",
             data: formData,
             success: function (msg) {
-                successNotif(msg,2500);
+                console.log(msg)
+                if (msg['OK']){
+                    successNotif(msg['resp'],2500);
+                }
+                else {
+                    failNotif(msg['resp'],2500);
+                }
+                
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                failNotif(errorThrown,2500);
             },
             processData: false,
             contentType: false,
@@ -400,9 +415,17 @@
 
 
     window.onload=()=>{
+        nitChangeScreen(smallerpls = false);
+
+        var date = new Date();
+        var currentDate = date.toISOString().substring(0,10);
+        var currentTime = date.toISOString().substring(11,16);
+
+        document.getElementById('flight_date').value = currentDate;
+        document.getElementById('log_end').value = currentTime;
+
+        
         changeValue('nselect_flighttype','Owner');
-        changeValue('nselect_fuelcurrency','EUR');
-        changeValue('nselect_taxcurrency','EUR');
     }
 </script>
 </body>
