@@ -111,6 +111,19 @@
                         <input type="number" max="10000" id="fuel_pricepaid_value" placeholder="In total">
                     </div>
 
+                    <div class="data-flex-v pointer" >
+                        <h3>Currency for your fuel<br><b>purchase outside Sion</b></h3>
+                        <div class="data-flex nselect" id="nselect_fuelcurrency"  onclick="unlock_nlist('nselect_fuelcurrency');">
+                            <p></p>
+                            <i class='bx bxs-chevron-down'></i>
+                        </div>
+                        <div class="nlist">
+                            <p onclick="changeValue('nselect_fuelcurrency','CHF')">CHF</p>
+                            <p onclick="changeValue('nselect_fuelcurrency','EUR')">EUR</p>
+                            <p onclick="changeValue('nselect_fuelcurrency','GBP')">GBP</p>
+                        </div>
+                    </div>
+
 
 
                     <div class="data-flex-v" style="align-items: flex-start;" id="fuel_receipt_div">
@@ -358,8 +371,8 @@
             submitdict['log']['fuel'] = aId('fuel_total').value.replace('e','');
         }
 
-
-
+        submitdict['fuel']['currency'] = document.querySelectorAll('#nselect_fuelcurrency p')[0].innerText;
+        
 
 
         if (aId('auth_code').value.length != 6){
