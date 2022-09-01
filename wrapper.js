@@ -35,7 +35,7 @@ function nitChangeScreen(smallerpls = false){
         {
             changed += 1;
             disableAnimations()
-            document.documentElement.style.fontSize = 16*(window.innerHeight/1080*0.8) + "px";
+            document.documentElement.style.fontSize = 16*(window.innerHeight/1080*1) + "px";
             enableAnimations()
             return 16*(window.innerHeight/1080*1.35);   
         }
