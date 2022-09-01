@@ -30,7 +30,7 @@
             <h1 class="slide-desc" style="color: white; margin-left: .5rem;"><span id="fail-text"></span> :(</h1>
         </div>
     </div>
-    <div id="done-wrapper">
+    <div id="done-wrapper" style="display: none;opacity: 0">
         <div id="done-display">
             <div class="data-flex" style="gap: 0;">
                 <img src="media/img/plane.gif" alt="" style="width: 4rem;" id="submitimg">
@@ -62,7 +62,6 @@
 
         <div class="data-flex">
             <p class="active" id="menu1" onclick="module_switch('menu1')">Submit</p>
-            <p id="menu2" onclick="module_switch('menu2')">View Flights</p>
         </div>
     </div>
 
@@ -319,6 +318,13 @@
         }
     }
 
+    function doneDisplay(){
+        aId('done-wrapper').style.display = "grid";
+        setTimeout(()=>{
+            aId('done-wrapper').style.opacity = "1";
+        },100)
+    }   
+
     function updateUpperCase(id) {
         aId(id).value = aId(id).value.toUpperCase();
     }  
@@ -455,6 +461,7 @@
                 else {
                     failNotif(msg['resp'],2500);
                 }
+                
                 
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) { 
