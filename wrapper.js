@@ -1,3 +1,5 @@
+
+
 function detectMob() {
     const toMatch = [
         /Android/i,
@@ -29,15 +31,17 @@ function enableAnimations(delay=100){
     },delay)
 }
 
+
 function nitChangeScreen(smallerpls = false){
     if (mobile){
         if (changed != 1)
-        {
+        {   
+            ratio = 1.2;
             changed += 1;
             disableAnimations()
-            document.documentElement.style.fontSize = 16*(window.innerHeight/1080*1.2) + "px";
+            document.documentElement.style.fontSize = 16*(window.innerHeight/1080*ratio) + "px";
             enableAnimations()
-            return 16*(window.innerHeight/1080*1.35);   
+            return 16*(window.innerHeight/1080*ratio);   
         }
         
     }
@@ -65,3 +69,4 @@ function nitChangeScreen(smallerpls = false){
     }
     
 }
+
